@@ -1,0 +1,68 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.db
+*.sqlite3
+*.log
+*.egg
+*.egg-info/
+dist/
+build/
+*.tar.gz
+*.whl
+*.bak
+*.swp
+*.swo
+.idea/
+
+# PyCharm
+.idea/*
+
+# Virtualenv
+venv/
+env/
+ENV/
+.venv/
+venv.bak/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# Mac OS X
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Pytest
+.cache/
+
+# Other IDEs or editors you might be using
+*.sublime-workspace
+*.sublime-project
+
+# Python bytecode files
+*.pyc
+*.pyo
+
+# Coverage reports
+coverage.xml
+*.cover
+*.coverage
+*.hypothesis/
+.nox/
+.tox/
+.coverage.*
+
+# MyPy
+.mypy_cache/
+
+# Build files (for pyproject, poetry, etc.)
+*.egg-info/
+dist/
+build/
