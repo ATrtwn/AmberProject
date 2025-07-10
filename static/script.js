@@ -8,7 +8,7 @@ function fetchBaseline() {
     })
     .then(res => res.json())
     .then(data => {
-        baselineProbs = data.probabilities;
+        baselineProbs = data.ground_probabilities;
         const zeros = new Array(baselineProbs.length).fill(0);
         plotDiagnosis(data.diagnoses, zeros, baselineProbs, data.thresholds);
         document.getElementById("decision").innerHTML = `<div class="recommendation">Please give me symptoms to see changes.</div>`;
@@ -24,8 +24,8 @@ function updateDiagnosisWithTests(selectedTests) {
     })
     .then(res => res.json())
     .then(data => {
-        const deltas = data.probabilities.map((p, i) => p - baselineProbs[i]);
-        plotDiagnosis(data.diagnoses, deltas, baselineProbs, data.thresholds);
+        const deltas = data.probabilities.map((p, i) => p - data.ground_probabilities[i]);
+        plotDiagnosis(data.diagnoses, deltas, data.ground_probabilities, data.thresholds);
 
         // same logic you already have for showing decision text
         const passedDiagnoses = data.diagnoses
@@ -278,7 +278,7 @@ function plotDiagnosis(diagnoses, deltas, baseline, thresholds) {
             t: 20,
             b: 100,
             l: 60,
-            r: 30
+            r: 60
         },
         barmode: 'stack',
         shapes: shapes,
@@ -409,5 +409,5 @@ const textarea = document.getElementById("symptom-input");
 
 textarea.addEventListener("input", () => {
   textarea.style.height = "auto"; // Reset height to shrink if needed
-  textarea.style.height = Math.min(textarea.scrollHeight, 300) + "px"; // Grow up to 200px
+  textarea.style.height = Math.min(textarea.scrollHeight, 400) + "px"; // Grow up to 200px
 });

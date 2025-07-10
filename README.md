@@ -39,7 +39,7 @@ clinical-dx-tool/
 ## Results/Graphs
 
 > Coming soon
-> ![Screenshot of the app](images/Screenshot_from_2025-07-10_17-10-04.png)
+> ![Screenshot of the app](images/Screenshot.png)
 
 ## Authors
 

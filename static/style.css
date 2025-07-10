@@ -1,5 +1,5 @@
 body {
-    font-family: "Courier New";
+    font-family: "Courier";
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -7,17 +7,26 @@ body {
 }
 .top-bar {
   width: 100%;
-  height: 100px;
+  height: 30px;
   background-color: #8dd9cc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+  font-family: Courier;
   font-size: 1.2rem;
-  justify-content: center;
+  justify-content: left;
+  padding: 1.2rem 2rem;
+}
+.top-bar svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+  position: relative;
+  top: 2px;
 }
 h1 {
     margin: 0;
+    margin-top: 1rem;
     color: white;
     font-size: 24px;
     font-weight: bold;
@@ -27,25 +36,38 @@ h1 {
   height: calc(100vh - 50px);
 }
 .sidebar {
-    width: 250px;
+    width: 350px;
     background-color: #b6ffe0;
     color: #324b4f;
     padding: 1rem;
     overflow-y: auto;
+    font-family: Courier;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar svg {
+  width: 20px;
+  height: 20px;
+  color: #324b4f;
+  position: relative;
+  top: 4px;
 }
 .input-wrapper {
-  position: relative;
-  width: 100%;
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 #symptom-input {
-  width: 100%;
-  resize: none;
-  overflow-y: auto;
-  line-height: 1.5;
-  padding: 0.5rem;
-  box-sizing: border-box;
-  border: none;
-  background-color: white;
+    width: 100%;
+    resize: none;
+    overflow-y: auto;
+    line-height: 1.5;
+    box-sizing: border-box;
+    border: none;
+    background-color: white;
+    flex-grow: 1;
+    padding: 0.5rem;
 }
 #symptom-input:focus {
     outline: none;
@@ -124,9 +146,20 @@ button.pastel-green:hover {
     flex-grow: 1;
     padding: 0;
     overflow-y: auto;
-    background-color: white;
-    display: flex;
+    overflow-x: hidden;
+    background-image: linear-gradient(to right, #b6ffe0, #bdffe2, #c4ffe5, #cafee7, #d1feea, #d2feed, #d3fdef, #d5fdf1, #d2fdf5, #d0fcf8, #cefcfc, #cdfbff);
     flex-direction: column;
+    min-width: 0;
+}
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  margin-left: 2rem;
+  margin-right: 3rem;
 }
 #plot {
     width: 100%;
@@ -135,8 +168,8 @@ button.pastel-green:hover {
     min-height: 350px;
     overflow: auto;
     background-color: white;
-    margin-top: 2em;
-    margin-bottom: 3em
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 .recommendation {
     line-height: 1;
@@ -149,9 +182,8 @@ button.pastel-green:hover {
     height: 150px;
     min-height: 100px;
     padding: 1rem;
+    padding-left: 2rem;
     margin: 0;
-    background-image: linear-gradient(to right, #b6ffe0, #befee2, #c5fde3, #ccfce5, #d3fbe7, #d0f8e5, #cdf4e3, #caf1e1, #bcebdb, #ade5d5, #9ddfd0, #8dd9cc);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     color: #324b4f;
     flex-grow: 1;
     overflow-y: auto;

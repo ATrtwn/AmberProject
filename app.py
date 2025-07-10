@@ -32,6 +32,7 @@ def get_diagnosis():
 
     # Randomly assigning threshold values for each diagnosis
     thresholds = []
+    np.random.seed(42)
     for diagnosis in df["Diagnosis"]:
         # Assign a random threshold value for each diagnosis (between 0.5 and 1.0, for example)
         threshold_value = round(np.random.uniform(0.5, 1.0), 2)
