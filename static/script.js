@@ -63,11 +63,16 @@ function updateDiagnosisWithTests(selectedTests) {
     });
 }
 
+function truncateLabel(label, maxLength = 10) {
+    if (label.length > maxLength) {
+        return label.slice(0, maxLength - 3) + '...';
+    }
+    return label;
+}
+
 // Plot function with base = baseline probabilities
 function plotDiagnosis(diagnoses, deltas, baseline, thresholds) {
-    const xTicks = diagnoses.map((_, i) => i);
-    // Original colors for baseline bars
-    //const baselineColors = new Array(baseline.length).fill('#D3D3D3');
+    const xTicks = diagnoses.map((_, i) => i)
 
     // Compute the difference (delta) by subtracting the baseline from the total values (y = baseline + delta)
     const deltasForHover = deltas.map((delta, index) => ({
@@ -94,10 +99,10 @@ function plotDiagnosis(diagnoses, deltas, baseline, thresholds) {
     const positiveDeltaTrace = {
         type: 'scatter',
         mode: 'markers',
-        x: [null],  // Just a dummy point
+        x: [null],
         y: [null],
         marker: {
-            color: '#9fd1c0', // Positive delta color (green)
+            color: '#9fd1c0',
             symbol: 'circle'
         },
         name: 'Positive Delta',
@@ -107,10 +112,10 @@ function plotDiagnosis(diagnoses, deltas, baseline, thresholds) {
     const negativeDeltaTrace = {
         type: 'scatter',
         mode: 'markers',
-        x: [null],  // Just a dummy point
+        x: [null],
         y: [null],
         marker: {
-            color: '#f3752d', // Negative delta color (orange)
+            color: '#f3752d',
             symbol: 'circle'
         },
         name: 'Negative Delta',
@@ -123,9 +128,9 @@ function plotDiagnosis(diagnoses, deltas, baseline, thresholds) {
         x: [],
         y: [],
         line: {
-            color: '#D3D3D3',  // Line color (light gray)
-            width: 2,           // Line width
-            dash: 'solid'       // Solid line style
+            color: '#D3D3D3',
+            width: 2,
+            dash: 'solid'
         },
         name: 'Baseline',
         hovertemplate: 'Baseline: %{y:.2f}<extra></extra>',
@@ -146,9 +151,9 @@ function plotDiagnosis(diagnoses, deltas, baseline, thresholds) {
 
         // Add intermediate points between xStart and xEnd
         for (let j = 0; j <= numPoints; j++) {
-            const xVal = xStart + (j / numPoints) * (xEnd - xStart); // Smoothly interpolate x values between xStart and xEnd
+            const xVal = xStart + (j / numPoints) * (xEnd - xStart);
             baselineLineTrace.x.push(xVal);
-            baselineLineTrace.y.push(baselineValue); // Same y value for all points to create a horizontal line
+            baselineLineTrace.y.push(baselineValue);
         }
 
         // Add a small gap between the segments
@@ -162,8 +167,8 @@ function plotDiagnosis(diagnoses, deltas, baseline, thresholds) {
     const shapes = [];
 
     const thresholdColors = {
-      classA: '#ca5708',
-      classB: '#dba183'
+        classA: '#ca5708',
+        classB: '#dba183'
     };
 
     const thresholdTraces = [];
@@ -173,18 +178,18 @@ function plotDiagnosis(diagnoses, deltas, baseline, thresholds) {
         threshArray.forEach(threshObj => {
             const { value, class: cls, name } = threshObj;
             shapes.push({
-              type: 'line',
-              xref: 'x',
-              yref: 'y',
-              x0: i - barWidth,
-              x1: i + barWidth,
-              y0: value,
-              y1: value,
-              line: {
-                color: thresholdColors[cls] || 'black',  // fallback to black if class unknown
-                width: 2,
-                dash: 'dot'
-              },
+                type: 'line',
+                xref: 'x',
+                yref: 'y',
+                x0: i - barWidth,
+                x1: i + barWidth,
+                y0: value,
+                y1: value,
+                line: {
+                    color: thresholdColors[cls] || 'black',  // fallback to black if class unknown
+                    width: 2,
+                    dash: 'dot'
+                },
             });
 
             const numPoints = 20;
@@ -211,6 +216,8 @@ function plotDiagnosis(diagnoses, deltas, baseline, thresholds) {
             });
         });
     });
+
+    const truncatedDiagnoses = diagnoses.map(label => truncateLabel(label, 20));
 
     Plotly.newPlot('plot', [
         ...thresholdTraces,
@@ -241,10 +248,11 @@ function plotDiagnosis(diagnoses, deltas, baseline, thresholds) {
             zerolinewidth: 2
         },
         xaxis: {
+            tickangle: 30,
             type: 'linear',
             tickmode: 'array',
             tickvals: xTicks,
-            ticktext: diagnoses,
+            ticktext: truncatedDiagnoses,
             tickfont: {
                 family: 'Courier New',
                 size: 14,
@@ -266,12 +274,18 @@ function plotDiagnosis(diagnoses, deltas, baseline, thresholds) {
             },
             align: 'center'
         },
-        margin: { t: 20 },
+        margin: {
+            t: 20,
+            b: 100,
+            l: 60,
+            r: 30
+        },
         barmode: 'stack',
         shapes: shapes,
         align: 'center',
         padding: 15,
         responsive: true,
+        autosize: true,
         dragmode: false
     }, {
         displayModeBar: false,
@@ -345,8 +359,6 @@ function extractAndSelectSymptoms() {
 
         } else {
             const li = document.createElement("li");
-            //li.textContent = "No keywords found";
-            //li.style.color = "#555";
             li.classList.add("no-keywords");
             keywordList.appendChild(li);
             showBtn.style.display = "inline-block";

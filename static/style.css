@@ -136,6 +136,7 @@ button.pastel-green:hover {
     overflow: auto;
     background-color: white;
     margin-top: 2em;
+    margin-bottom: 3em
 }
 .recommendation {
     line-height: 1;

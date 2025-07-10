@@ -10,10 +10,6 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-#@app.route('/tests')
-#def get_tests():
-#    return jsonify(get_all_tests())
-
 @app.route('/diagnosis', methods=['POST'])
 def get_diagnosis():
     data = request.get_json()
