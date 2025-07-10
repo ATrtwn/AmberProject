@@ -27,6 +27,8 @@ clinical-dx-tool/
 │   └── symptoms.csv         # Training/testing datasets
 ├── utils/
 │   └── extract_symptoms.py  # Symptom extraction logic
+├── images/
+│   └── screenshot.png
 └── README.md                # Project documentation (this file)
 ```
 
@@ -37,6 +39,7 @@ clinical-dx-tool/
 ## Results/Graphs
 
 > Coming soon
+> ![Screenshot of the app](images/Screenshot from 2025-07-10 17-10-04.png)
 
 ## Authors
 
